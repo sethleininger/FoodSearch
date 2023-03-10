@@ -1,11 +1,11 @@
+
 let btnSearch = document.querySelector("#button-addon3");
 
 const searchApi = btnSearch.addEventListener("click", function () {
 
-    let searchQuery = document.querySelector("input[type = 'search']").value.trim();
-    searchQuery = searchQuery.toLowerCase().replace(' ', '_');
+    let searchQuery = document.querySelector("input[type = 'search']").value.trim().toLowerCase().replace(' ', '_');
     let requestUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${searchQuery}`
-    console.log(searchQuery);
+    //console.log(searchQuery);
 
     fetch(requestUrl, {
         method: 'GET',
@@ -16,9 +16,9 @@ const searchApi = btnSearch.addEventListener("click", function () {
         .then(function (response) {
             return response.json();
         }).then(function (response) {
-            console.log(response.description);
-            console.log(response.extract);
-            console.log(response.title);
+            //console.log(response.description);
+            //console.log(response.extract);
+            //console.log(response.title);
 
             let bandName = document.getElementById("wiki");
             let bandNameUrl = response.title;
@@ -32,93 +32,88 @@ const searchApi = btnSearch.addEventListener("click", function () {
             let extrUrl = response.extract;
             extr.innerHTML = extrUrl;
 
+
             if (response.items === searchQuery.value) {
+                saveToLocalStorage(response);
                 console.log(`Your search page '${searchQuery}' exists on English Wikipedia`);
             } else {
                 console.log(`No search results found for '${searchQuery}'`);
             }
         })
 
-
-
-
         .catch(function (error) {
             console.log(error);
         });
+    setTimeout(() => {
+        console.log("Delayed for 5 seconds.");
+        readProjectsFromStorage();
+    }, "5000");
+
+
 
 });
 
 
+function saveToLocalStorage(response) {
 
-// let bandInfo = (data) => {
-//     let description = data.description[0];
-//     console.log(description);
+    let savedInfo = localStorage.getItem('saved-info');
+    if (savedInfo) {
+        savedInfo = JSON.parse(savedInfo);
+    } else {
+        savedInfo = [];
+    }
 
-//     let bandPull = `https://en.wikipedia.org/api/rest_v1/page/summary/${searchQuery}`;
-//     searchApi(bandPull);
+    //console.log("test");
 
+    let bandNameUrl = response.title;
+    let descrUrl = response.description;
+    let extrUrl = response.extract;
+    let object = {
+        bandNameUrl,
+        descrUrl,
+        extrUrl
+    };
+    //console.log(object);
+    //console.log(savedInfo);
+    savedInfo.push(object);
+    localStorage.setItem('saved-info', JSON.stringify(savedInfo));
 
-// }
-
-
-
-// fetch(requestUrl, {
-//     method: 'GET',
-//     headers: new Headers({
-//         'Api-User-Agent': 'Example/1.0'
-//     })
-// })
-//     .then(function (response) {
-//         return response.json();
-//     }).then(function (response) {
-//         console.log(response);
-//         if (response.query.search[0].title === "") {
-//             console.log("Your search page 'Nelson Mandela' exists on English Wikipedia");
-//         }
-//     })
-//     .catch(function (error) {
-//         console.log(error);
-//     });
-
-// const handleFormSubmit = (event) => {
-//     event.preventDefault();
-
-//     let requestUrl = `https://en.wikipedia.org/api/rest_v1/page/title/${searchQuery}`
-//     let searchInput = document.querySelector('.search').value.trim();
-//     searchInput = searchInput.toLowerCase().replace(' ', '-');
-
-//     var params = {
-//         action: "query",
-//         list: "search",
-//         srsearch: "Nelson Mandela",
-//         format: "json"
-//     };
-
-//     requestUrl = requestUrl + "?origin=*";
-//     Object.keys(params).forEach(function (key) {
-//         url += "&" + key + "=" + params[key];
-//     });
-//     console.log(params);
+    //console.log(savedInfo);
 
 
-// requestUrl = requestUrl.concat(`geo/1.0/direct?limit=1&q=${cityName}&appid=${APIKey}`);
-// searchApi(requestUrl);
+}
+//this is meant to be reading saved data from local, using the search input as the 
+function readProjectsFromStorage() {
 
-// let currentFore = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${APIKey}&units=imperial`;
-// searchApi(currentFore);
-//}
-//btnSearch.addEventListener('click', handleFormSubmit);
+    let savedInfo = localStorage.getItem('saved-info');
+    console.log(savedInfo);
+    if (savedInfo) {
+        savedInfo = JSON.parse(savedInfo);
+    } else {
+        savedInfo = [];
+    }
 
+    let pastResults = document.querySelector("#playlist");
+    pastResults.innerHTML = "";
+    savedInfo.forEach(searchHist => {
+        console.log(searchHist);
+        let pastButton = document.createElement("button");
+        pastButton.textContent = searchHist.bandNameUrl;
+        pastButton.classList.add("btn", "btn-secondary", "mb-2");
+        pastButton.addEventListener("click", (event) => {
+            event.stopPropagation();
+            let searchQuery = document.querySelector("input[type = 'search']").value.trim().toLowerCase().replace(' ', '_');
+            let searchWikiUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${searchQuery}`
 
+            console.log("Test" + pastResults);
 
-// Using Fetch
-// fetch('https://example/...', {
-//     method: 'GET',
-//     headers: new Headers({
-//         'Api-User-Agent': 'Example/1.0'
-//     })
-// }).then(function (response) {
-//     return response.json();
-// }).then(function (data) {
-//     // ...
+        });
+        pastResults.appendChild(pastButton);
+    });
+
+}
+
+//deletes local storage when page is reloaded
+// window.addEventListener('beforeunload', () => {
+//     window.localStorage.clear();
 // });
