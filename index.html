@@ -14,9 +14,9 @@
 
 <body class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
 
-    <header class="bg-teal-700 text-white sticky top-0 z-10">
+    <header class="bg-gradient-to-r from-sky-500 to-emerald-500 text-white sticky top-0 z-10">
         <section class="max-w-4xl mx-auto p-4 flex justify-between items-center">
-            <h1 class="text-5xl font-medium max-w-4xl mx-auto p-4 flex justify-between items-cente">
+            <h1 class="text-5xl font-medium max-w-4xl mx-auto p-4 flex justify-between items-center">
                 YourTunes
             </h1>
         </section>
@@ -33,7 +33,7 @@
                 <input type="search"
                     class="bg-gradient-to-r from-cyan-500 to-blue-500 relative m-0 -mr-px block w-[1%] min-w-0 flex-auto rounded-l border border-solid border-neutral-300 bg-transparent bg-clip-padding px-3 py-1.5 text-base font-normal text-neutral-700 outline-none transition duration-300 ease-in-out focus:border-primary-600 focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200"
                     placeholder="Search" aria-label="Search" aria-describedby="button-addon3" />
-                    <!-- This will be the event listener for the input submit -->
+                <!-- This will be the event listener for the input submit -->
                 <button
                     class="relative z-[2] rounded-r border-2 border-primary px-6 py-2 text-xs font-medium uppercase text-primary transition duration-150 ease-in-out bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 focus:outline-none focus:ring-0"
                     type="button" id="button-addon3" data-te-ripple-init>
@@ -45,13 +45,16 @@
     <!-- These are the boxes that will store the saved data and the media player -->
     <div class="grid grid-cols-3 gap-4 p-5">
         <!-- This is where the local data (url to the songs liked)  will go -->
-        <div class="shadow-lg bg-cyan-600 text-green-500 text-lg font-bold text-center p-10 rounded-lg row-span-6">
+        <div id="playlist"
+            class="shadow-lg bg-cyan-600 text-green-500 text-lg font-bold text-center p-10 rounded-lg row-span-6">
             Playlist
         </div>
         <div class="shadow-lg bg-cyan-600 text-green-500 text-lg font-bold text-center p-10 rounded-lg"></div>
         <!-- This will be where we populate the wiki search -->
         <div class="shadow-lg bg-cyan-600 text-green-500 text-lg font-bold text-center p-10 rounded-lg row-span-6">
-            Wiki
+            <h2 id="wiki">wiki</h2>
+            <p id="description"></p>
+            <p id="extract"></p>
         </div>
         <div class=" flex shadow-lg bg-fuchsia-600 text-green-500 text-lg font-bold text-center p-10 rounded-lg">
             <!-- This will be where the player loads the link to the song -->
@@ -61,7 +64,7 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="scriptpractice.js"></script>
 </body>
 
 </html>
