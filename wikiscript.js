@@ -5,7 +5,7 @@ function searchApi() {
 
     let searchQuery = document.querySelector("input[type = 'search']").value.trim().toLowerCase().replace(' ', '_');
     let requestUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${searchQuery}`
-    //console.log(searchQuery);
+    //console.log(requestUrl);
 
     fetch(requestUrl, {
         method: 'GET',
@@ -35,9 +35,9 @@ function searchApi() {
 
             if (response.items === searchQuery.value) {
                 saveToLocalStorage(response);
-                console.log(`Your search page '${searchQuery}' exists on English Wikipedia`);
+                //console.log(`Your search page '${searchQuery}' exists on English Wikipedia`);
             } else {
-                console.log(`No search results found for '${searchQuery}'`);
+                //console.log(`No search results found for '${searchQuery}'`);
             }
         })
 
@@ -45,7 +45,7 @@ function searchApi() {
             console.log(error);
         });
     setTimeout(() => {
-        console.log("Delayed for 5 seconds.");
+        //console.log("Delayed for 1 second.");
         readProjectsFromStorage();
     }, "1000");
 
@@ -86,10 +86,12 @@ function saveToLocalStorage(response) {
 
 
 }
+
+
 //this is meant to be reading saved data from local, using the search input as the 
 function readProjectsFromStorage() {
     let savedInfo = localStorage.getItem('saved-info');
-    console.log(savedInfo);
+    //console.log(savedInfo);
     if (savedInfo) {
         savedInfo = JSON.parse(savedInfo);
     } else {
@@ -100,53 +102,38 @@ function readProjectsFromStorage() {
     pastResults.innerHTML = "";
     savedInfo.forEach(searchHist => {
         console.log(searchHist);
-        let pastButton = document.createElement("button");
-        pastButton.textContent = searchHist.bandNameUrl;
+        let pastSearch = document.createElement("p");
+        pastSearch.textContent = searchHist.bandNameUrl;
         console.log(searchHist.bandNameUrl);
-        pastButton.classList.add("btn", "btn-secondary", "mb-2");
-        pastButton.addEventListener("click", (event) => {
-            event.stopPropagation();
-            //let searchQuery = searchHist.bandNameUrl.trim().toLowerCase().replace(' ', '_');
-            let searchWikiUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${searchHist.bandNameUrl}`
-            searchApi(searchWikiUrl);
-            console.log("Test" + pastResults);
+        pastSearch.classList.add("bg-gray-500", "border", "border-black", "text-white");
 
-        });
-        pastResults.appendChild(pastButton);
+
+
+        // pastSearch.addEventListener("click", (event) => {
+        //     let text = searchHist.bandNameUrl;
+        //     async () => {
+        //         try {
+        //             await navigator.clipboard.writeText(text);
+        //             console.log('Content copied to clipboard');
+        //         } catch (err) {
+        //             console.error('Failed to copy: ', err);
+        //         }
+        //     }
+
+
+
+        //         event.stopPropagation();
+        //         let newSearchQuery = searchHist.bandNameUrl.trim().toLowerCase().replace(' ', '_');
+        //         console.log(newSearchQuery);
+        //         let searchWikiUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${newSearchQuery}`
+
+        //         //console.log("Test" + searchWikiUrl);
+        //         searchApi(searchWikiUrl);
+        // });
+        pastResults.appendChild(pastSearch);
     });
 
 }
-
-
-// function readProjectsFromStorage() {
-
-//     let savedInfo = localStorage.getItem('saved-info');
-//     console.log(savedInfo);
-//     if (savedInfo) {
-//         savedInfo = JSON.parse(savedInfo);
-//     } else {
-//         savedInfo = [];
-//     }
-
-//     let pastResults = document.querySelector("#playlist");
-//     pastResults.innerHTML = "";
-//     savedInfo.forEach(searchHist => {
-//         console.log(searchHist);
-//         let pastButton = document.createElement("button");
-//         pastButton.textContent = searchHist.bandNameUrl;
-//         pastButton.classList.add("btn", "btn-secondary", "mb-2");
-//         pastButton.addEventListener("click", (event) => {
-//             event.stopPropagation();
-//             //let searchQuery = document.querySelector("input[type = 'search']").value.trim().toLowerCase().replace(' ', '_');
-//             //let searchWikiUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${searchHist.bandNameUrl}`
-//             searchApi(searchHist.bandNameUrl);
-//             console.log("Test" + pastResults);
-
-//         });
-//         pastResults.appendChild(pastButton);
-//     });
-
-// }
 
 //deletes local storage when page is reloaded
 window.addEventListener('beforeunload', () => {
