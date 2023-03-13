@@ -1,6 +1,6 @@
-
 let btnSearch = document.querySelector("#button-addon3");
 
+//search api by request url function, had to set a "new header" for wikimedia api
 function searchApi() {
 
     let searchQuery = document.querySelector("input[type = 'search']").value.trim().toLowerCase().replace(' ', '_');
@@ -20,9 +20,9 @@ function searchApi() {
             // console.log(response.extract);
             // console.log(response.title);
 
-            let bandName = document.getElementById("wiki");
-            let bandNameUrl = response.title;
-            bandName.innerHTML = bandNameUrl;
+            let searchName = document.getElementById("wiki");
+            let searchNameUrl = response.title;
+            searchName.innerHTML = searchNameUrl;
 
             let descr = document.getElementById("description");
             let descrUrl = response.description;
@@ -44,20 +44,18 @@ function searchApi() {
         .catch(function (error) {
             console.log(error);
         });
+    //set timeout for the past search results to populate
     setTimeout(() => {
         // console.log("Delayed for 1 second.");
         readProjectsFromStorage();
     }, "1000");
 
-
     document.querySelector("input[type = 'search']").value = " ";
-
-
 };
+
 btnSearch.addEventListener("click", searchApi);
 
-
-
+//saves to local storage through JSON
 function saveToLocalStorage(response) {
 
     let savedInfo = localStorage.getItem('saved-info');
@@ -69,11 +67,11 @@ function saveToLocalStorage(response) {
 
     // console.log("test");
 
-    let bandNameUrl = response.title;
+    let searchNameUrl = response.title;
     // let descrUrl = response.description;
     // let extrUrl = response.extract;
     let object = {
-        bandNameUrl,
+        searchNameUrl,
         //    descrUrl,
         //   extrUrl
     };
@@ -88,7 +86,7 @@ function saveToLocalStorage(response) {
 }
 
 
-//this is meant to be reading saved data from local, using the search input as the 
+//this function reads saved data from local, using the search input as the key and then displays within a past search history container.
 function readProjectsFromStorage() {
     let savedInfo = localStorage.getItem('saved-info');
     // console.log(savedInfo);
@@ -103,12 +101,12 @@ function readProjectsFromStorage() {
     savedInfo.forEach(searchHist => {
         console.log(searchHist);
         let pastSearch = document.createElement("p");
-        pastSearch.textContent = searchHist.bandNameUrl;
-        console.log(searchHist.bandNameUrl);
+        pastSearch.textContent = searchHist.searchNameUrl;
+        console.log(searchHist.searchNameUrl);
         pastSearch.classList.add("bg-gray-500", "border", "border-black", "text-white");
 
         // pastSearch.addEventListener("click", (event) => {
-        //     let text = searchHist.bandNameUrl;
+        //     let text = searchHist.searchNameUrl;
         //     async () => {
         //         try {
         //             await navigator.clipboard.writeText(text);
@@ -121,7 +119,7 @@ function readProjectsFromStorage() {
 
 
         //         event.stopPropagation();
-        //         let newSearchQuery = searchHist.bandNameUrl.trim().toLowerCase().replace(' ', '_');
+        //         let newSearchQuery = searchHist.searchNameUrl.trim().toLowerCase().replace(' ', '_');
         // console.log(newSearchQuery);
         //         let searchWikiUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${newSearchQuery}`
 
@@ -132,5 +130,3 @@ function readProjectsFromStorage() {
     });
 
 }
-
-//deletes local storage when page is reloaded
