@@ -58,13 +58,14 @@
         </div>
         <div class=" flex shadow-lg bg-fuchsia-600 text-green-500 text-lg font-bold text-center p-10 rounded-lg">
             <!-- This will be where the player loads the link to the song -->
-            <iframe id="ytplayer" type="text/html" width="640" height="360"
-                src="https://www.youtube.com/embed/M7lc1UVf-VE?autoplay=1&origin=http://example.com" frameborder="0">
+            <iframe class="ytplayer" type="text/html" width="640" height="360"
+                src="https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q= + searchTerms + `&key=${YOUTUBE_API_KEY}" frameborder="0">
             </iframe>
         </div>
     </div>
 
     <script src="wikiscript.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
