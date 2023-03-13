@@ -5,7 +5,7 @@ function searchApi() {
 
     let searchQuery = document.querySelector("input[type = 'search']").value.trim().toLowerCase().replace(' ', '_');
     let requestUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${searchQuery}`
-    //console.log(requestUrl);
+    // console.log(requestUrl);
 
     fetch(requestUrl, {
         method: 'GET',
@@ -16,9 +16,9 @@ function searchApi() {
         .then(function (response) {
             return response.json();
         }).then(function (response) {
-            //console.log(response.description);
-            //console.log(response.extract);
-            //console.log(response.title);
+            // console.log(response.description);
+            // console.log(response.extract);
+            // console.log(response.title);
 
             let bandName = document.getElementById("wiki");
             let bandNameUrl = response.title;
@@ -35,9 +35,9 @@ function searchApi() {
 
             if (response.items === searchQuery.value) {
                 saveToLocalStorage(response);
-                //console.log(`Your search page '${searchQuery}' exists on English Wikipedia`);
+                // console.log(`Your search page '${searchQuery}' exists on English Wikipedia`);
             } else {
-                //console.log(`No search results found for '${searchQuery}'`);
+                // console.log(`No search results found for '${searchQuery}'`);
             }
         })
 
@@ -45,7 +45,7 @@ function searchApi() {
             console.log(error);
         });
     setTimeout(() => {
-        //console.log("Delayed for 1 second.");
+        // console.log("Delayed for 1 second.");
         readProjectsFromStorage();
     }, "1000");
 
@@ -67,7 +67,7 @@ function saveToLocalStorage(response) {
         savedInfo = [];
     }
 
-    //console.log("test");
+    // console.log("test");
 
     let bandNameUrl = response.title;
     // let descrUrl = response.description;
@@ -77,12 +77,12 @@ function saveToLocalStorage(response) {
         //    descrUrl,
         //   extrUrl
     };
-    //console.log(object);
-    //console.log(savedInfo);
+    // console.log(object);
+    // console.log(savedInfo);
     savedInfo.push(object);
     localStorage.setItem('saved-info', JSON.stringify(savedInfo));
 
-    //console.log(savedInfo);
+    // console.log(savedInfo);
 
 
 }
@@ -91,7 +91,7 @@ function saveToLocalStorage(response) {
 //this is meant to be reading saved data from local, using the search input as the 
 function readProjectsFromStorage() {
     let savedInfo = localStorage.getItem('saved-info');
-    //console.log(savedInfo);
+    // console.log(savedInfo);
     if (savedInfo) {
         savedInfo = JSON.parse(savedInfo);
     } else {
@@ -107,16 +107,14 @@ function readProjectsFromStorage() {
         console.log(searchHist.bandNameUrl);
         pastSearch.classList.add("bg-gray-500", "border", "border-black", "text-white");
 
-
-
         // pastSearch.addEventListener("click", (event) => {
         //     let text = searchHist.bandNameUrl;
         //     async () => {
         //         try {
         //             await navigator.clipboard.writeText(text);
-        //             console.log('Content copied to clipboard');
+        // console.log('Content copied to clipboard');
         //         } catch (err) {
-        //             console.error('Failed to copy: ', err);
+        // console.error('Failed to copy: ', err);
         //         }
         //     }
 
@@ -124,10 +122,10 @@ function readProjectsFromStorage() {
 
         //         event.stopPropagation();
         //         let newSearchQuery = searchHist.bandNameUrl.trim().toLowerCase().replace(' ', '_');
-        //         console.log(newSearchQuery);
+        // console.log(newSearchQuery);
         //         let searchWikiUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${newSearchQuery}`
 
-        //         //console.log("Test" + searchWikiUrl);
+        // console.log("Test" + searchWikiUrl);
         //         searchApi(searchWikiUrl);
         // });
         pastResults.appendChild(pastSearch);
