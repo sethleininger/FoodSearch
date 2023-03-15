@@ -5,7 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Food Search</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="styles.css" />
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -16,12 +20,13 @@
 
     <header class="bg-gradient-to-r from-sky-500 to-emerald-500 text-rose-700 sticky top-0 z-10">
         <section class="max-w-4xl mx-auto p-4 flex justify-between items-center ">
-            <h1 class="text-7xl font-medium max-w-4xl mx-auto p-4 flex justify-between items-center text-decoration-line: underline underline decoration-indigo-500 ">
-                Foodies
+            <h1
+                class="text-7xl font-medium max-w-4xl mx-auto p-4 flex justify-between items-center bg-rose-50 rounded-t-xl rounded-br-xl decoration-indigo-500 ">
+                Food Search
             </h1>
         </section>
         <section class="mx-auto p-2 flex justify-between items-center">
-            <h2 class="mx-auto p-2 text-2xl dark:text-white flex items-center">
+            <h2 class="mx-auto p-2 text-2xl text-rose-700 bg-rose-50 rounded-t-xl rounded-br-xl flex items-center">
                 Search your favorite foods here to find out more!</h2>
         </section>
     </header>
@@ -32,14 +37,13 @@
         </div>
     </div>
     <!-- This is for the search bar/button -->
-   
+
     <!-- These are the boxes that will store the saved data and the media player -->
     <div class="grid grid-cols-3 gap-4 p-5">
         <!-- This is where the local data (url to the songs liked)  will go -->
-        <div
-            class="shadow-lg bg-cyan-600 text-green-500 text-lg font-bold text-center p-10 rounded-lg row-span-6">
+        <div class="shadow-lg bg-cyan-600 text-green-500 text-lg font-bold text-center p-10 rounded-lg row-span-6">
             <h2 class="text-4xl font-bold dark:text-white">Search History</h2>
-            <p id="playlist" class ="p-2 mx-16 space-y-4 justify-between"></p>
+            <p id="playlist" class="p-2 mx-16 space-y-4 justify-between"></p>
         </div>
         <div class="flex justify-center">
             <div class="mb-3 xl:w-96">
@@ -57,9 +61,10 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- This will be where we populate the wiki search -->
-        <div class="shadow-lg bg-cyan-600 text-green-500 text-lg font-bold text-center p-10 rounded-lg row-span-6 space-y-4">
+        <div
+            class="shadow-lg bg-cyan-600 text-green-500 text-lg font-bold text-center p-10 rounded-lg row-span-6 space-y-4">
             <h2 id="wiki" class="text-4xl font-bold dark:text-white">Wiki Search</h2>
             <p id="description"></p>
             <p id="extract"></p>
@@ -71,10 +76,10 @@
         </div>
     </div>
 
-    
+
     <script src="script.js"></script>
     <script src="wikiscript.js"></script>
-    
+
 
 </body>
 

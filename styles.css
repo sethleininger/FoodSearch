@@ -1,0 +1,10 @@
+:root {
+    font-family: 'Lobster Two', cursive;
+}
+
+#playlist,
+input,
+#description,
+#extract {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
