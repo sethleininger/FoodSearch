@@ -6,11 +6,7 @@ const searchApi2 = btnSearch2.addEventListener("click", function () {
   searchQuery = searchQuery.toLowerCase().replace(' ', '_');
   //const searchTerms = searchQuery = document.querySelector("input[type = 'search']").value.trim();;
 
-<<<<<<< HEAD
   // const searchTerms = searchQuery = document.querySelector("input[type = 'search']").value.trim();;
-=======
-  //const searchTerms = searchQuery = document.querySelector("input[type = 'search']").value.trim();;
->>>>>>> 372d8b43cde871f7e45d45cb47c5555593cf3346
   const YOUTUBE_API_KEY = "AIzaSyAIqG_Rna2mkVuTMJMJzjh2yQxvgbgY5hw";
 
   const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=1&q=` + searchQuery + `&key=${YOUTUBE_API_KEY}`;
