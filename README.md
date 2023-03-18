@@ -15,7 +15,7 @@ There are some known issues, like needing to reload on launch if you want to cle
 
 Deployment: https://sethleininger.github.io/FoodSearch/
 
-[Screen Shot](./assets/images/food-search-screenshot.JPG)
+![Screen Shot](./assets/images/food-search-screenshot.JPG)
   
 
 ## Credits
